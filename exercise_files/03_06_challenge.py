@@ -9,10 +9,10 @@ class Canvas:
         self._canvas = [[' ' for y in range(self._y)] for x in range(self._x)]
 
     def hitsWall(self, point):
-        return point[0] < 0 or point[0] >= self._x or point[1] < 0 or point[1] >= self._y
+        return round(point[0]) < 0 or round(point[0]) or round(point[1]) or round(point[1]) >=
 
     def setPos(self, pos, mark):
-        self._canvas[pos[0]][pos[1]] = mark
+        self._canvas[round(pos[0])][round(pos[1])] = mark
 
     def clear(self):
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -29,26 +29,27 @@ class TerminalScribe:
         self.mark = '*'
         self.framerate = 0.05
         self.pos = [0, 0]
-
+        self.direction= [0, 1]
+    def setDegrees(self, degrees)
+        radians = (degrees/180) * math.pi
+        self.direction = [math.sin(radians), -math.cos(radians)]
+        
     def up(self):
-        pos = [self.pos[0], self.pos[1]-1]
-        if not self.canvas.hitsWall(pos):
-            self.draw(pos)
-
+       self.direction = [0, -1]
+       self.forward()
+    
     def down(self):
-        pos = [self.pos[0], self.pos[1]+1]
-        if not self.canvas.hitsWall(pos):
-            self.draw(pos)
+        self.direction = [0, -1]
+        self.forward()
 
     def right(self):
-        pos = [self.pos[0]+1, self.pos[1]]
-        if not self.canvas.hitsWall(pos):
-            self.draw(pos)
+        self.direction = [0, -1]
+        self.forward()
 
     def left(self):
-        pos = [self.pos[0]-1, self.pos[1]]
-        if not self.canvas.hitsWall(pos):
-            self.draw(pos)
+        self.direction = [0, -1]
+        self.forward()
+
 
     def drawSquare(self, size):
         i = 0
@@ -80,5 +81,7 @@ class TerminalScribe:
 canvas = Canvas(30, 30)
 scribe = TerminalScribe(canvas)
 
-scribe.drawSquare(20)
+scribe.setDegrees(135)
+for i in range(30):
+    scribe.foward
 
